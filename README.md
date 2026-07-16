@@ -31,6 +31,10 @@ This repository contains the platform foundation through the Phase 4 credit-conf
 - Tenant-defined charge engine with product attachment, caps and exemptions
 - Eligibility, affordability and guarantor-capacity policy evaluation
 - Multi-step approval workflow definitions and repayment-schedule previews
+- Loan applications, assessment snapshots, guarantor consent and workflow decisions
+- Contractual loan records with persisted charges and repayment installments
+- Provider-neutral, idempotent payout processing with maker/checker release controls
+- Individual, bulk, scheduled, recurring, dividend, refund, welfare, supplier, withdrawal and loan-disbursement payouts
 
 ## Quick start with Docker
 
@@ -83,4 +87,4 @@ This is an implementation milestone, not yet a production release. Before real m
 
 ## Next milestone
 
-Phase 5 will add loan applications, assessments, approvals, disbursements, all payout types and persisted repayment schedules.
+Phase 6 will add repayment collection, allocation, arrears, penalties, restructuring and recovery workflows.

@@ -52,6 +52,16 @@ Authenticated requests use `Authorization: Bearer <token>`. Tenant routes derive
 | POST | `/loan-products/{id}/evaluate-eligibility` | `loans.review` | Evaluate custom eligibility rules |
 | POST | `/loan-products/{id}/evaluate-policy` | `loans.review` | Evaluate limits and affordability |
 | POST | `/loan-products/{id}/guarantor-capacity` | `loans.review` | Evaluate available guarantor exposure |
+| GET/POST | `/loan-applications` and `/members/{member}/loan-applications` | `loans.view` / `loans.create` | List or create applications |
+| POST | `/loan-applications/{id}/assess` | `loans.review` | Persist an assessment snapshot |
+| PATCH | `/loan-applications/{id}/submit` | `loans.review` | Submit a passing application |
+| PATCH | `/loan-applications/{id}/decision` | `loans.approve` plus step permission | Record a workflow decision |
+| POST | `/loan-applications/{id}/disburse` | `loans.disburse` | Create the loan, schedule and payout |
+| GET/POST | `/payouts` | `payouts.view` / `payouts.create` | List or create any payout type |
+| POST | `/payout-batches` | `payouts.create` | Atomically create up to 1,000 bulk payout items |
+| PATCH | `/payouts/{id}/approve` | `payouts.approve` | Maker/checker payout approval |
+| PATCH | `/payouts/{id}/release` | `payouts.release` | Release to a configured provider |
+| POST | `/payouts/{id}/events` | `payouts.reconcile` | Apply an idempotent provider event |
 
 Financial amounts use integer minor units. Collection clients must supply a stable `idempotency_key`; replaying the same key returns the original receipt instead of posting twice.
 

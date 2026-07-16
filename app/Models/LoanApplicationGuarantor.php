@@ -1,0 +1,4 @@
+<?php
+namespace App\Models;
+use App\Models\Concerns\BelongsToTenant;use App\Models\Concerns\HasAuditTrail;use Illuminate\Database\Eloquent\Concerns\HasUlids;use Illuminate\Database\Eloquent\Model;use Illuminate\Database\Eloquent\Relations\BelongsTo;
+class LoanApplicationGuarantor extends Model{use BelongsToTenant,HasAuditTrail,HasUlids;protected $fillable=['cooperative_id','loan_application_id','guarantor_member_id','guaranteed_amount_minor','capacity_snapshot','status','consented_at'];protected function casts():array{return ['guaranteed_amount_minor'=>'integer','capacity_snapshot'=>'array','consented_at'=>'datetime'];}public function application():BelongsTo{return $this->belongsTo(LoanApplication::class,'loan_application_id');}public function guarantor():BelongsTo{return $this->belongsTo(Member::class,'guarantor_member_id');}}

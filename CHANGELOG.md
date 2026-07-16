@@ -1,5 +1,17 @@
 # Changelog
 
+## Phase 5 — Lending and payouts
+
+- Added loan applications with immutable applicant, policy, assessment, schedule and charge snapshots.
+- Added guarantor commitments with capacity snapshots and explicit consent.
+- Added amount-aware, permission-driven multi-step approval decisions.
+- Added contractual loans, snapshotted charges and persisted repayment installments.
+- Added disbursement payouts with correct separation of added and deducted charges.
+- Added provider-neutral payouts for loan, withdrawal, dividend, refund, welfare, insurance, supplier, reimbursement, payroll, recurring, scheduled, bulk and general use cases.
+- Added maker/checker approval, release controls, encrypted account numbers and idempotent provider events.
+- Added payout-to-loan activation only after confirmed provider payment.
+- Added tenant APIs, permissions and payout lifecycle tests.
+
 ## Phase 4 — Credit configuration
 
 - Added configurable loan products with principal, tenure, interest, frequency, moratorium and guarantor policies.

@@ -43,6 +43,14 @@ The platform is a multi-tenant cooperative operations system. A cooperative is t
 - Reusable multi-step approval workflow definitions
 - Deterministic repayment-schedule previews
 
+## Phase 5 lending and payout modules
+
+- Loan applications, assessment snapshots, guarantor commitments and approval decisions
+- Contractual loan, charge and installment records
+- Provider-neutral payout commands and idempotent provider event history
+- Maker/checker payout controls with protected beneficiary accounts
+- Loan activation only after confirmed disbursement payment
+
 ## Request flow
 
 1. Sanctum authenticates the user.

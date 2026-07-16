@@ -35,4 +35,7 @@ class Member extends Model
     public function payments(): HasMany { return $this->hasMany(Payment::class); }
     public function savingsAccounts(): HasMany { return $this->hasMany(SavingsAccount::class); }
     public function savingsWithdrawalRequests(): HasMany { return $this->hasMany(SavingsWithdrawalRequest::class); }
+    public function loanApplications(): HasMany { return $this->hasMany(LoanApplication::class); }
+    public function loans(): HasMany { return $this->hasMany(Loan::class); }
+    public function payouts(): HasMany { return $this->hasMany(Payout::class); }
 }

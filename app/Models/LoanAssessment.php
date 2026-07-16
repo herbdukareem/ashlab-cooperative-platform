@@ -1,0 +1,4 @@
+<?php
+namespace App\Models;
+use App\Models\Concerns\BelongsToTenant; use App\Models\Concerns\HasAuditTrail; use Illuminate\Database\Eloquent\Concerns\HasUlids; use Illuminate\Database\Eloquent\Model; use Illuminate\Database\Eloquent\Relations\BelongsTo;
+class LoanAssessment extends Model {use BelongsToTenant,HasAuditTrail,HasUlids;protected $fillable=['cooperative_id','loan_application_id','facts','eligibility_result','policy_result','schedule_preview','charge_preview','recommendation','assessed_by','assessed_at'];protected function casts():array{return ['facts'=>'array','eligibility_result'=>'array','policy_result'=>'array','schedule_preview'=>'array','charge_preview'=>'array','assessed_at'=>'datetime'];}public function application():BelongsTo{return $this->belongsTo(LoanApplication::class,'loan_application_id');}}

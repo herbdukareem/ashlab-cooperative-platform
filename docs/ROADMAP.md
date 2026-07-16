@@ -36,7 +36,7 @@
 - Guarantor capacity controls
 - Transparent charge and schedule previews
 
-## Milestone 5 — Loans and payouts
+## Milestone 5 — Loans and payouts (implemented)
 
 - Loan applications, assessment and approvals
 - Disbursement and repayment schedule generation
