@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Domain\Accounting\Services\AutoPoster;
 
 class RecordMemberCollection
 {
+    public function __construct(private readonly AutoPoster $accounting) {}
     public function execute(Member $member, array $data): Payment
     {
         if ($existing = Payment::query()->where('idempotency_key', $data['idempotency_key'])->first()) return $existing->load('allocations');
@@ -51,6 +53,11 @@ class RecordMemberCollection
             }
 
             $payment->update(['allocated_minor' => $allocated, 'unallocated_minor' => $payment->amount_minor - $allocated]);
+            $payment->load('allocations');
+            $context = ['member_id' => $member->id, 'entry_date' => $payment->received_at->toDateString(), 'currency' => $payment->currency];
+            $this->accounting->postIfConfigured('collection.contribution', $payment, (int) $payment->allocations->where('allocation_type', 'contribution_obligation')->sum('amount_minor'), $context);
+            $this->accounting->postIfConfigured('collection.savings', $payment, (int) $payment->allocations->where('allocation_type', 'savings_account')->sum('amount_minor'), $context);
+            $this->accounting->postIfConfigured('collection.unallocated', $payment, $payment->unallocated_minor, $context);
             return $payment->refresh()->load('allocations');
         });
     }

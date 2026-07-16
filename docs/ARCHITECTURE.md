@@ -60,6 +60,15 @@ The platform is a multi-tenant cooperative operations system. A cooperative is t
 - Maker/checker restructuring with old and new schedule snapshots
 - Recovery cases, promises, actions and expenses
 
+## Phase 7 accounting modules
+
+- Hierarchical tenant chart of accounts and fiscal periods
+- Configurable business-event posting rules
+- Balanced immutable journal lines and reversal entries
+- Member, loan, branch and custom subsidiary dimensions
+- Protected cooperative bank accounts and statement reconciliation
+- Derived trial balance, income statement and balance sheet
+
 ## Request flow
 
 1. Sanctum authenticates the user.

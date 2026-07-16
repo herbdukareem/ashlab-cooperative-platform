@@ -38,6 +38,10 @@ This repository contains the platform foundation through the Phase 4 credit-conf
 - Idempotent partial, full and advance loan repayments with component-level allocation
 - Repayment reversals, automated arrears aging and configurable late penalties
 - Loan restructuring, recovery cases, promises to pay and collection activity history
+- Tenant chart of accounts, fiscal periods and configurable automatic posting rules
+- Balanced immutable journals, reversals and member, loan and branch subsidiary dimensions
+- Protected cooperative bank accounts, statement matching and reconciliation
+- Trial balance, income statement and balance sheet reporting
 
 ## Quick start with Docker
 
@@ -90,4 +94,4 @@ This is an implementation milestone, not yet a production release. Before real m
 
 ## Next milestone
 
-Phase 7 will add the chart of accounts, immutable journals, subsidiary ledgers, reconciliation and financial reporting.
+Phase 8 will add the administration and member web applications, mobile experience, notifications, operational dashboards and pilot deployment hardening.

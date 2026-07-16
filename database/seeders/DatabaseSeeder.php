@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             PlatformAdminSeeder::class,
+            AccountingSeeder::class,
         ]);
     }
 }
-

@@ -52,7 +52,7 @@
 - Arrears, reminders and penalties
 - Restructuring and recovery
 
-## Milestone 7 — Accounting and intelligence
+## Milestone 7 — Accounting and intelligence (implemented)
 
 - Chart of accounts and immutable journals
 - General and subsidiary ledgers

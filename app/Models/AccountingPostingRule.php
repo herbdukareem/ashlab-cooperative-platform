@@ -1,0 +1,4 @@
+<?php
+namespace App\Models;
+use App\Models\Concerns\BelongsToTenant;use App\Models\Concerns\HasAuditTrail;use Illuminate\Database\Eloquent\Concerns\HasUlids;use Illuminate\Database\Eloquent\Model;use Illuminate\Database\Eloquent\Relations\BelongsTo;
+class AccountingPostingRule extends Model{use BelongsToTenant,HasAuditTrail,HasUlids;protected $fillable=['cooperative_id','event_type','debit_account_id','credit_account_id','description_template','conditions','dimensions','is_active'];protected function casts():array{return ['conditions'=>'array','dimensions'=>'array','is_active'=>'boolean'];}public function debitAccount():BelongsTo{return $this->belongsTo(LedgerAccount::class,'debit_account_id');}public function creditAccount():BelongsTo{return $this->belongsTo(LedgerAccount::class,'credit_account_id');}}

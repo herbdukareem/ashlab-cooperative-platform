@@ -1,0 +1,4 @@
+<?php
+namespace App\Models;
+use App\Models\Concerns\BelongsToTenant;use Illuminate\Database\Eloquent\Concerns\HasUlids;use Illuminate\Database\Eloquent\Model;use Illuminate\Database\Eloquent\Relations\HasMany;
+class BankStatementLine extends Model{use BelongsToTenant,HasUlids;protected $fillable=['cooperative_id','bank_reconciliation_id','transaction_date','reference','description','amount_minor','running_balance_minor','external_id','status'];protected function casts():array{return ['transaction_date'=>'date','amount_minor'=>'integer','running_balance_minor'=>'integer'];}public function reconciliation():\Illuminate\Database\Eloquent\Relations\BelongsTo{return $this->belongsTo(BankReconciliation::class,'bank_reconciliation_id');}public function matches():HasMany{return $this->hasMany(BankReconciliationMatch::class);}}

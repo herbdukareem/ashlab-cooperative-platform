@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Domain\Accounting\Services\AutoPoster;
 
 class ProcessSavingsWithdrawal
 {
+    public function __construct(private readonly AutoPoster $accounting) {}
     public function request(Member $member, SavingsAccount $account, array $data): SavingsWithdrawalRequest
     {
         abort_unless($account->member_id === $member->id, 404);
@@ -74,6 +76,9 @@ class ProcessSavingsWithdrawal
                 'description' => 'Savings withdrawal, including applicable fee.', 'metadata' => ['withdrawal_request_id' => $withdrawal->id, 'member_amount_minor' => $withdrawal->amount_minor, 'fee_minor' => $withdrawal->fee_minor],
             ]);
             $withdrawal->update(['status' => WithdrawalStatus::Paid, 'completed_at' => now(), 'completed_by' => Auth::id()]);
+            $context = ['member_id' => $withdrawal->member_id, 'entry_date' => today()->toDateString()];
+            $this->accounting->postIfConfigured('savings.withdrawal_paid', $withdrawal, $withdrawal->amount_minor, $context);
+            $this->accounting->postIfConfigured('savings.withdrawal_fee', $withdrawal, $withdrawal->fee_minor, $context);
             return $withdrawal->refresh();
         });
     }

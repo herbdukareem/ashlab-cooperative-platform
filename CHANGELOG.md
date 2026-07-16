@@ -1,5 +1,17 @@
 # Changelog
 
+## Phase 7 — Accounting and intelligence
+
+- Added a hierarchical tenant chart of accounts and controlled fiscal periods.
+- Added configurable event-to-account posting rules and starter accounting provisioning.
+- Added balanced, integer-minor-unit double-entry journals with immutable lines.
+- Added reversal-only corrections and automatic reversals for repayment and payout reversals.
+- Added automatic postings for contributions, savings, loans, repayments, penalties, recovery expenses and payouts.
+- Added member, loan, branch and custom subsidiary dimensions.
+- Added protected cooperative bank accounts, statement import, partial/manual/automatic matching and reconciliation completion.
+- Added derived trial balance, income statement and balance sheet reports.
+- Added tenant permissions, APIs, documentation and accounting integrity tests.
+
 ## Phase 6 — Repayment and recovery
 
 - Added idempotent scheduled, partial, full, advance and employer-deduction repayment collection.

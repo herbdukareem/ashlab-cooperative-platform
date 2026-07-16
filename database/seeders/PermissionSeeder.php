@@ -24,7 +24,7 @@ class PermissionSeeder extends Seeder
             'repayments' => ['repayments.view', 'repayments.collect', 'repayments.reverse', 'repayments.restructure.request', 'repayments.restructure.approve', 'repayments.restructure.apply'],
             'recovery' => ['recovery.view', 'recovery.manage', 'recovery.writeoff'],
             'payouts' => ['payouts.view', 'payouts.create', 'payouts.review', 'payouts.approve', 'payouts.release', 'payouts.reverse', 'payouts.reconcile'],
-            'accounting' => ['accounting.view', 'accounting.post', 'accounting.reverse', 'accounting.reconcile'],
+            'accounting' => ['accounting.view', 'accounting.configure', 'accounting.periods.manage', 'accounting.post', 'accounting.reverse', 'accounting.reconcile'],
             'reports' => ['reports.view', 'reports.export'],
         ];
 

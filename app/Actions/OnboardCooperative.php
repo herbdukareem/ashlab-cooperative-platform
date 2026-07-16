@@ -12,12 +12,13 @@ use App\Models\MemberCategory;
 use App\Models\Role;
 use App\Models\User;
 use App\Support\Tenancy\TenantContext;
+use App\Domain\Accounting\Actions\ProvisionAccounting;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class OnboardCooperative
 {
-    public function __construct(private readonly TenantContext $context) {}
+    public function __construct(private readonly TenantContext $context, private readonly ProvisionAccounting $accounting) {}
 
     public function execute(array $data): Cooperative
     {
@@ -68,6 +69,7 @@ class OnboardCooperative
                     'requires_guarantor' => false, 'required_guarantors' => 0,
                     'requires_kyc' => true, 'is_active' => true,
                 ]);
+                $this->accounting->execute($cooperative->financial_year_start_month);
             } finally {
                 $this->context->clear();
             }

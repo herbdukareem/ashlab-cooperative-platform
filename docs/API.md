@@ -69,6 +69,17 @@ Authenticated requests use `Authorization: Bearer <token>`. Tenant routes derive
 | PATCH | `/loan-restructures/{id}/apply` | `repayments.restructure.apply` | Replace unpaid installments with approved schedule |
 | GET/PATCH | `/recovery-cases` | `recovery.view` / `recovery.manage` | Review and manage recovery cases |
 | POST | `/recovery-cases/{id}/actions` | `recovery.manage` | Record a recovery activity or expense |
+| CRUD | `/ledger-accounts` | `accounting.configure` | Manage the tenant chart of accounts |
+| GET/POST | `/accounting-periods` | `accounting.view` / `accounting.periods.manage` | List or create fiscal periods |
+| PATCH | `/accounting-periods/{id}/close` | `accounting.periods.manage` | Close a posting period |
+| GET/POST | `/journals` | `accounting.view` / `accounting.post` | List or post balanced journals |
+| POST | `/journals/{id}/reverse` | `accounting.reverse` | Create a reversing journal |
+| GET/POST | `/accounting-posting-rules` | `accounting.view` / `accounting.configure` | Configure automatic postings |
+| GET | `/accounting-reports/trial-balance` | `reports.view` | Generate a trial balance |
+| GET | `/accounting-reports/income-statement` | `reports.view` | Generate income and expenditure |
+| GET | `/accounting-reports/balance-sheet` | `reports.view` | Generate a balance sheet |
+| GET | `/accounting-reports/subsidiary-ledger` | `reports.view` | Generate member, loan or branch ledger activity |
+| GET/POST | `/bank-reconciliations` | `accounting.reconcile` | Import and reconcile bank statements |
 
 Financial amounts use integer minor units. Collection clients must supply a stable `idempotency_key`; replaying the same key returns the original receipt instead of posting twice.
 
