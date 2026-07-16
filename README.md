@@ -2,7 +2,7 @@
 
 A configurable, multi-tenant cooperative operations platform for membership, contributions, savings, loans, repayments, payouts, accounting, reporting and member self-service.
 
-This repository contains the Phase 1 platform foundation, Phase 2 membership module and Phase 3 contribution and savings engine:
+This repository contains the platform foundation through the Phase 4 credit-configuration engine:
 
 - Laravel 13 REST API on PHP 8.3+
 - MySQL 8.4 as the primary database
@@ -27,6 +27,10 @@ This repository contains the Phase 1 platform foundation, Phase 2 membership mod
 - Idempotent multi-channel collections, receipts and unallocated-payment tracking
 - Configurable savings products, member accounts and immutable transaction ledgers
 - Savings statements and approval-controlled withdrawals with reserved balances
+- Configurable loan products, interest methods, terms and repayment frequencies
+- Tenant-defined charge engine with product attachment, caps and exemptions
+- Eligibility, affordability and guarantor-capacity policy evaluation
+- Multi-step approval workflow definitions and repayment-schedule previews
 
 ## Quick start with Docker
 
@@ -79,4 +83,4 @@ This is an implementation milestone, not yet a production release. Before real m
 
 ## Next milestone
 
-Phase 4 will add loan products, applications, guarantor exposure, approval workflows, disbursements and repayment schedules.
+Phase 5 will add loan applications, assessments, approvals, disbursements, all payout types and persisted repayment schedules.

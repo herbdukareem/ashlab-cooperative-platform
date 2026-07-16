@@ -21,6 +21,9 @@ use App\Http\Controllers\Api\MemberContributionController;
 use App\Http\Controllers\Api\SavingsAccountController;
 use App\Http\Controllers\Api\SavingsProductController;
 use App\Http\Controllers\Api\SavingsWithdrawalController;
+use App\Http\Controllers\Api\ApprovalWorkflowController;
+use App\Http\Controllers\Api\ChargeController;
+use App\Http\Controllers\Api\LoanProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
@@ -93,5 +96,13 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::patch('savings-withdrawals/{withdrawal}/approve', [SavingsWithdrawalController::class, 'approve'])->middleware('permission:savings.withdraw.approve');
         Route::patch('savings-withdrawals/{withdrawal}/reject', [SavingsWithdrawalController::class, 'reject'])->middleware('permission:savings.withdraw.approve');
         Route::patch('savings-withdrawals/{withdrawal}/complete', [SavingsWithdrawalController::class, 'complete'])->middleware('permission:savings.withdraw.complete');
+
+        Route::apiResource('charges', ChargeController::class)->middleware('permission:charges.configure');
+        Route::apiResource('approval-workflows', ApprovalWorkflowController::class)->middleware('permission:workflows.configure');
+        Route::apiResource('loan-products', LoanProductController::class)->middleware('permission:loans.configure');
+        Route::post('loan-products/{loanProduct}/preview', [LoanProductController::class, 'preview'])->middleware('permission:loans.view');
+        Route::post('loan-products/{loanProduct}/evaluate-eligibility', [LoanProductController::class, 'evaluate'])->middleware('permission:loans.review');
+        Route::post('loan-products/{loanProduct}/evaluate-policy', [LoanProductController::class, 'policy'])->middleware('permission:loans.review');
+        Route::post('loan-products/{loanProduct}/guarantor-capacity', [LoanProductController::class, 'guarantorCapacity'])->middleware('permission:loans.review');
     });
 });

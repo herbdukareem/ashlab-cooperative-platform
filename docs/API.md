@@ -45,6 +45,13 @@ Authenticated requests use `Authorization: Bearer <token>`. Tenant routes derive
 | PATCH | `/savings-withdrawals/{id}/approve` | `savings.withdraw.approve` | Approve and reserve withdrawal funds |
 | PATCH | `/savings-withdrawals/{id}/reject` | `savings.withdraw.approve` | Reject a pending withdrawal |
 | PATCH | `/savings-withdrawals/{id}/complete` | `savings.withdraw.complete` | Complete an approved withdrawal |
+| CRUD | `/charges` | `charges.configure` | Configure tenant-defined loan charges |
+| CRUD | `/approval-workflows` | `workflows.configure` | Configure reusable approval steps |
+| CRUD | `/loan-products` | `loans.configure` | Configure loan terms, limits and rules |
+| POST | `/loan-products/{id}/preview` | `loans.view` | Preview charges and a repayment schedule |
+| POST | `/loan-products/{id}/evaluate-eligibility` | `loans.review` | Evaluate custom eligibility rules |
+| POST | `/loan-products/{id}/evaluate-policy` | `loans.review` | Evaluate limits and affordability |
+| POST | `/loan-products/{id}/guarantor-capacity` | `loans.review` | Evaluate available guarantor exposure |
 
 Financial amounts use integer minor units. Collection clients must supply a stable `idempotency_key`; replaying the same key returns the original receipt instead of posting twice.
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## Phase 4 — Credit configuration
+
+- Added configurable loan products with principal, tenure, interest, frequency, moratorium and guarantor policies.
+- Added a tenant-defined charge engine supporting fixed and percentage calculations, caps, timing, treatment, refunds and member-category exemptions.
+- Added product-level charge attachment with ordering, mandatory flags and overrides.
+- Added configurable hard and advisory eligibility rules.
+- Added contribution, savings, membership-duration and debt-to-income credit policy evaluation.
+- Added guarantor exposure and active-guarantee capacity evaluation.
+- Added reusable multi-step approval workflows with amount bands and distinct-actor controls.
+- Added integer-minor-unit repayment previews for flat, reducing-balance and zero-interest schedules.
+- Added tenant permissions, APIs, factories and credit-engine tests.
+
 ## Phase 3 — Contributions and savings
 
 - Added configurable fixed or flexible contribution plans with daily through annual, one-time and custom schedules.

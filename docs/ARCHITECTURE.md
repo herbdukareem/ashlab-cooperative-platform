@@ -28,6 +28,21 @@ The platform is a multi-tenant cooperative operations system. A cooperative is t
 - Beneficiary allocation rules
 - Internal and external guarantors with consent tracking
 
+## Phase 3 financial modules
+
+- Contribution plans, enrolments, obligations and arrears
+- Idempotent collections and allocation records
+- Savings products, accounts, immutable transactions and controlled withdrawals
+
+## Phase 4 credit-configuration modules
+
+- Loan product terms and policy limits
+- Tenant-defined, product-attached charges
+- Generic eligibility and affordability evaluation
+- Guarantor-capacity policies
+- Reusable multi-step approval workflow definitions
+- Deterministic repayment-schedule previews
+
 ## Request flow
 
 1. Sanctum authenticates the user.

@@ -1,0 +1,9 @@
+<?php
+namespace Tests\Feature\Credit;
+use App\Domain\Credit\Services\RepaymentScheduleGenerator; use App\Enums\InterestMethod; use App\Models\Cooperative; use App\Models\LoanProduct; use App\Support\Tenancy\TenantContext; use Carbon\CarbonImmutable; use Illuminate\Foundation\Testing\RefreshDatabase; use Tests\TestCase;
+class RepaymentScheduleTest extends TestCase
+{
+    use RefreshDatabase;
+    public function test_flat_schedule_preserves_principal_and_interest_totals():void{$cooperative=Cooperative::factory()->create();app(TenantContext::class)->set($cooperative);$product=LoanProduct::factory()->create(['cooperative_id'=>$cooperative->id,'interest_method'=>InterestMethod::Flat,'annual_interest_rate_basis_points'=>1200]);$schedule=app(RepaymentScheduleGenerator::class)->generate($product,1200000,12,CarbonImmutable::parse('2026-01-01'));$this->assertCount(12,$schedule['installments']);$this->assertSame(1200000,array_sum(array_column($schedule['installments'],'principal_minor')));$this->assertSame(144000,$schedule['interest_minor']);$this->assertSame(0,$schedule['installments'][11]['balance_after_minor']);}
+    public function test_bullet_schedule_accrues_for_full_tenure():void{$cooperative=Cooperative::factory()->create();app(TenantContext::class)->set($cooperative);$product=LoanProduct::factory()->create(['cooperative_id'=>$cooperative->id,'interest_method'=>InterestMethod::Flat,'repayment_frequency'=>\App\Enums\RepaymentFrequency::Bullet,'annual_interest_rate_basis_points'=>1200]);$schedule=app(RepaymentScheduleGenerator::class)->generate($product,1000000,12,CarbonImmutable::parse('2026-01-01'));$this->assertCount(1,$schedule['installments']);$this->assertSame(120000,$schedule['interest_minor']);$this->assertSame('2027-01-01',$schedule['installments'][0]['due_date']);}
+}

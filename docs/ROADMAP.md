@@ -28,7 +28,7 @@
 - Withdrawals with approval controls
 - Member statements
 
-## Milestone 4 — Credit configuration
+## Milestone 4 — Credit configuration (implemented)
 
 - Loan products and eligibility rules
 - Configurable charge engine
