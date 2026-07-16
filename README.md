@@ -34,7 +34,7 @@ make up
 
 The API becomes available at `http://localhost:8080/api/v1`.
 
-Before setup, change `PLATFORM_ADMIN_EMAIL` and `PLATFORM_ADMIN_PASSWORD` in `.env.example` or in the generated `.env`. Never use the example password in a deployed environment.
+Before setup, set `DB_PASSWORD`, `DB_ROOT_PASSWORD`, `PLATFORM_ADMIN_EMAIL` and `PLATFORM_ADMIN_PASSWORD` in the generated `.env`. Password values are intentionally blank in `.env.example` and Docker Compose will refuse to start until database passwords are provided.
 
 For production, set `IDENTIFIER_HASH_KEY` to an independent random secret and preserve it securely. Changing or losing it will prevent reliable duplicate checks for protected identifiers.
 
