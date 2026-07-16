@@ -1,5 +1,16 @@
 # Changelog
 
+## Phase 6 — Repayment and recovery
+
+- Added idempotent scheduled, partial, full, advance and employer-deduction repayment collection.
+- Added oldest-installment allocation across penalties, charges, interest and principal.
+- Added immutable component allocation records and controlled repayment reversals.
+- Added automated installment aging, loan arrears status and product-specific recovery escalation.
+- Added fixed or percentage late penalties using tenant-configured charge rules.
+- Added maker/checker restructuring with preserved old and proposed schedule snapshots.
+- Added recovery cases, assignment, promises to pay, contact actions, legal escalation and recovery expenses.
+- Added daily servicing automation, tenant permissions, APIs and servicing tests.
+
 ## Phase 5 — Lending and payouts
 
 - Added loan applications with immutable applicant, policy, assessment, schedule and charge snapshots.

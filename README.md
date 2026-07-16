@@ -35,6 +35,9 @@ This repository contains the platform foundation through the Phase 4 credit-conf
 - Contractual loan records with persisted charges and repayment installments
 - Provider-neutral, idempotent payout processing with maker/checker release controls
 - Individual, bulk, scheduled, recurring, dividend, refund, welfare, supplier, withdrawal and loan-disbursement payouts
+- Idempotent partial, full and advance loan repayments with component-level allocation
+- Repayment reversals, automated arrears aging and configurable late penalties
+- Loan restructuring, recovery cases, promises to pay and collection activity history
 
 ## Quick start with Docker
 
@@ -87,4 +90,4 @@ This is an implementation milestone, not yet a production release. Before real m
 
 ## Next milestone
 
-Phase 6 will add repayment collection, allocation, arrears, penalties, restructuring and recovery workflows.
+Phase 7 will add the chart of accounts, immutable journals, subsidiary ledgers, reconciliation and financial reporting.

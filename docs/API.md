@@ -62,6 +62,13 @@ Authenticated requests use `Authorization: Bearer <token>`. Tenant routes derive
 | PATCH | `/payouts/{id}/approve` | `payouts.approve` | Maker/checker payout approval |
 | PATCH | `/payouts/{id}/release` | `payouts.release` | Release to a configured provider |
 | POST | `/payouts/{id}/events` | `payouts.reconcile` | Apply an idempotent provider event |
+| GET/POST | `/loans/{loan}/repayments` | `repayments.view` / `repayments.collect` | List or collect repayments |
+| POST | `/repayments/{id}/reverse` | `repayments.reverse` | Post a controlled repayment reversal |
+| POST | `/loans/{loan}/restructures` | `repayments.restructure.request` | Preview and request restructuring |
+| PATCH | `/loan-restructures/{id}/decision` | `repayments.restructure.approve` | Approve or reject restructuring |
+| PATCH | `/loan-restructures/{id}/apply` | `repayments.restructure.apply` | Replace unpaid installments with approved schedule |
+| GET/PATCH | `/recovery-cases` | `recovery.view` / `recovery.manage` | Review and manage recovery cases |
+| POST | `/recovery-cases/{id}/actions` | `recovery.manage` | Record a recovery activity or expense |
 
 Financial amounts use integer minor units. Collection clients must supply a stable `idempotency_key`; replaying the same key returns the original receipt instead of posting twice.
 

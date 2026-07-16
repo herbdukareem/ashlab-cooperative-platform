@@ -45,7 +45,7 @@
 - Idempotency, webhooks, retries and reversals
 - Payout reconciliation
 
-## Milestone 6 — Repayment and recovery
+## Milestone 6 — Repayment and recovery (implemented)
 
 - Repayment collection and allocation
 - Bulk employer remittances

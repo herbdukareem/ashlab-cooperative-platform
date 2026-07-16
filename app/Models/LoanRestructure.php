@@ -1,0 +1,4 @@
+<?php
+namespace App\Models;
+use App\Enums\RestructureStatus;use App\Models\Concerns\BelongsToTenant;use App\Models\Concerns\HasAuditTrail;use Illuminate\Database\Eloquent\Concerns\HasUlids;use Illuminate\Database\Eloquent\Model;
+class LoanRestructure extends Model{use BelongsToTenant,HasAuditTrail,HasUlids;protected $fillable=['cooperative_id','loan_id','reference','reason','status','capitalized_arrears_minor','new_interest_rate_basis_points','new_repayment_frequency','new_tenure','new_start_date','old_schedule_snapshot','new_schedule_snapshot','requested_by','decided_by','decided_at','decision_reason','applied_at'];protected function casts():array{return ['status'=>RestructureStatus::class,'capitalized_arrears_minor'=>'integer','new_interest_rate_basis_points'=>'integer','new_tenure'=>'integer','new_start_date'=>'date','old_schedule_snapshot'=>'array','new_schedule_snapshot'=>'array','decided_at'=>'datetime','applied_at'=>'datetime'];}}

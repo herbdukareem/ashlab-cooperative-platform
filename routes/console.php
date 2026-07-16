@@ -10,3 +10,4 @@ Artisan::command('about-platform', function (): void {
 
 Schedule::command('contributions:generate')->dailyAt('00:10')->withoutOverlapping();
 Schedule::command('contributions:refresh-statuses')->dailyAt('00:25')->withoutOverlapping();
+Schedule::command('loans:service-arrears')->dailyAt('01:00')->withoutOverlapping();

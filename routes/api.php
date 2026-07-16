@@ -26,6 +26,9 @@ use App\Http\Controllers\Api\ChargeController;
 use App\Http\Controllers\Api\LoanProductController;
 use App\Http\Controllers\Api\LoanApplicationController;
 use App\Http\Controllers\Api\PayoutController;
+use App\Http\Controllers\Api\LoanRepaymentController;
+use App\Http\Controllers\Api\LoanRestructureController;
+use App\Http\Controllers\Api\LoanRecoveryController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
@@ -122,5 +125,15 @@ Route::middleware('auth:sanctum')->group(function (): void {
         Route::patch('payouts/{payout}/approve', [PayoutController::class, 'approve'])->middleware('permission:payouts.approve');
         Route::patch('payouts/{payout}/release', [PayoutController::class, 'release'])->middleware('permission:payouts.release');
         Route::post('payouts/{payout}/events', [PayoutController::class, 'event'])->middleware('permission:payouts.reconcile');
+        Route::get('loans/{loan}/repayments', [LoanRepaymentController::class, 'index'])->middleware('permission:repayments.view');
+        Route::post('loans/{loan}/repayments', [LoanRepaymentController::class, 'store'])->middleware('permission:repayments.collect');
+        Route::post('repayments/{repayment}/reverse', [LoanRepaymentController::class, 'reverse'])->middleware('permission:repayments.reverse');
+        Route::post('loans/{loan}/restructures', [LoanRestructureController::class, 'store'])->middleware('permission:repayments.restructure.request');
+        Route::patch('loan-restructures/{restructure}/decision', [LoanRestructureController::class, 'decide'])->middleware('permission:repayments.restructure.approve');
+        Route::patch('loan-restructures/{restructure}/apply', [LoanRestructureController::class, 'apply'])->middleware('permission:repayments.restructure.apply');
+        Route::get('recovery-cases', [LoanRecoveryController::class, 'index'])->middleware('permission:recovery.view');
+        Route::get('recovery-cases/{recoveryCase}', [LoanRecoveryController::class, 'show'])->middleware('permission:recovery.view');
+        Route::patch('recovery-cases/{recoveryCase}', [LoanRecoveryController::class, 'update'])->middleware('permission:recovery.manage');
+        Route::post('recovery-cases/{recoveryCase}/actions', [LoanRecoveryController::class, 'action'])->middleware('permission:recovery.manage');
     });
 });
