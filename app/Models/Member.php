@@ -30,4 +30,9 @@ class Member extends Model
     public function beneficiaries(): HasMany { return $this->hasMany(MemberBeneficiary::class); }
     public function guarantors(): HasMany { return $this->hasMany(MemberGuarantor::class); }
     public function statusHistory(): HasMany { return $this->hasMany(MemberStatusHistory::class); }
+    public function contributionPlans(): HasMany { return $this->hasMany(MemberContributionPlan::class); }
+    public function contributionObligations(): HasMany { return $this->hasMany(ContributionObligation::class); }
+    public function payments(): HasMany { return $this->hasMany(Payment::class); }
+    public function savingsAccounts(): HasMany { return $this->hasMany(SavingsAccount::class); }
+    public function savingsWithdrawalRequests(): HasMany { return $this->hasMany(SavingsWithdrawalRequest::class); }
 }

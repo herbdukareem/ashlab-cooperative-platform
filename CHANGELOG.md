@@ -1,5 +1,16 @@
 # Changelog
 
+## Phase 3 — Contributions and savings
+
+- Added configurable fixed or flexible contribution plans with daily through annual, one-time and custom schedules.
+- Added member enrolment, deterministic obligation generation, grace periods and arrears status refresh.
+- Added idempotent collections with oldest-obligation-first allocation and support for mixed contribution and savings payments.
+- Added payment receipts, allocation records and explicit unallocated balances.
+- Added savings products, member accounts and append-only savings transactions.
+- Added withdrawal limits, lock-in periods, fees, minimum-balance rules and maker/checker approval states.
+- Added balance reservation at withdrawal approval to prevent double spending.
+- Added paginated savings statements, tenant permissions, scheduled commands, factories and financial-flow tests.
+
 ## Phase 2 — Membership foundation
 
 - Added configurable member categories and requirements.
@@ -16,4 +27,3 @@
 
 - Added Laravel, MySQL, Redis and Docker foundation.
 - Added cooperative tenancy, authentication, branches, users, roles, settings and audit logs.
-

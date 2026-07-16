@@ -1,4 +1,4 @@
-# Phase 1 API
+# Platform API — Phases 1–3
 
 Base URL: `/api/v1`
 
@@ -32,6 +32,21 @@ Authenticated requests use `Authorization: Bearer <token>`. Tenant routes derive
 | POST | `/members/{member}/bank-accounts` | `kyc.manage` | Add a protected bank account |
 | CRUD | `/members/{member}/beneficiaries` | `members.beneficiaries.manage` | Manage beneficiary allocation |
 | CRUD | `/members/{member}/guarantors` | `members.guarantors.manage` | Manage guarantors and consent |
+| CRUD | `/contribution-plans` | `contributions.configure` | Configure contribution schedules and rules |
+| GET | `/members/{member}/contributions` | `contributions.view` | List enrolments and obligations |
+| POST | `/members/{member}/contribution-enrollments` | `contributions.enroll` | Enrol a member in a contribution plan |
+| POST | `/contribution-enrollments/{id}/generate` | `contributions.generate` | Generate obligations through a date |
+| GET | `/payments` | `payments.view` | List collection receipts |
+| POST | `/members/{member}/collections` | `contributions.collect` | Record and allocate an idempotent collection |
+| CRUD | `/savings-products` | `savings.configure` | Configure savings rules and limits |
+| GET/POST | `/members/{member}/savings-accounts` | `savings.view` / `savings.accounts.manage` | List or open savings accounts |
+| GET | `/savings-accounts/{id}/statement` | `savings.view` | Return a paginated savings statement |
+| POST | `/members/{member}/savings-accounts/{id}/withdrawals` | `savings.withdraw.request` | Request a savings withdrawal |
+| PATCH | `/savings-withdrawals/{id}/approve` | `savings.withdraw.approve` | Approve and reserve withdrawal funds |
+| PATCH | `/savings-withdrawals/{id}/reject` | `savings.withdraw.approve` | Reject a pending withdrawal |
+| PATCH | `/savings-withdrawals/{id}/complete` | `savings.withdraw.complete` | Complete an approved withdrawal |
+
+Financial amounts use integer minor units. Collection clients must supply a stable `idempotency_key`; replaying the same key returns the original receipt instead of posting twice.
 
 ## Cooperative onboarding payload
 

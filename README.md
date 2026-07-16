@@ -2,7 +2,7 @@
 
 A configurable, multi-tenant cooperative operations platform for membership, contributions, savings, loans, repayments, payouts, accounting, reporting and member self-service.
 
-This repository contains the Phase 1 platform foundation and Phase 2 membership module:
+This repository contains the Phase 1 platform foundation, Phase 2 membership module and Phase 3 contribution and savings engine:
 
 - Laravel 13 REST API on PHP 8.3+
 - MySQL 8.4 as the primary database
@@ -22,6 +22,11 @@ This repository contains the Phase 1 platform foundation and Phase 2 membership 
 - Protected member bank-account records
 - Beneficiaries with 100% allocation enforcement
 - Internal and external guarantors with consent status
+- Configurable recurring and custom-date contribution plans
+- Member enrolment, scheduled obligations, arrears and oldest-debt-first allocation
+- Idempotent multi-channel collections, receipts and unallocated-payment tracking
+- Configurable savings products, member accounts and immutable transaction ledgers
+- Savings statements and approval-controlled withdrawals with reserved balances
 
 ## Quick start with Docker
 
@@ -63,15 +68,15 @@ composer test
 - `app/Models/Concerns` — tenant scoping and audit behaviour
 - `app/Actions` — transactional application operations
 - `app/Http` — API transport, validation and authorisation
-- `database/migrations` — MySQL-compatible Phase 1 schema
+- `database/migrations` — MySQL-compatible, tenant-scoped platform schema
 - `database/seeders` — permission catalogue and platform administrator
 - `tests/Feature` — authentication, onboarding and isolation tests
 - `docs` — architecture and API reference
 
 ## Security posture
 
-This is the first implementation milestone, not yet a production release. Before real member or financial data is introduced, complete the deployment hardening, secrets management, MFA, backup restoration testing, penetration testing, privacy review and payment-provider certification work described in the product plan.
+This is an implementation milestone, not yet a production release. Before real member or financial data is introduced, complete deployment hardening, secrets management, MFA, backup restoration testing, penetration testing, privacy review and payment-provider certification.
 
 ## Next milestone
 
-Phase 3 will add contribution plans, obligations, collections, savings products, withdrawals and member financial statements.
+Phase 4 will add loan products, applications, guarantor exposure, approval workflows, disbursements and repayment schedules.

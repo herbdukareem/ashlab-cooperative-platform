@@ -1,6 +1,6 @@
 # Delivery roadmap
 
-## Milestone 1 — Platform foundation (current)
+## Milestone 1 — Platform foundation (implemented)
 
 - MySQL-backed Laravel API
 - Cooperative tenant isolation
@@ -19,7 +19,7 @@
 - Beneficiaries and guarantors
 - Member status lifecycle
 
-## Milestone 3 — Contributions and savings
+## Milestone 3 — Contributions and savings (implemented)
 
 - Configurable contribution plans
 - Obligations and arrears
