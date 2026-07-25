@@ -35,6 +35,10 @@ use App\Http\Controllers\Api\AccountingReportController;
 use App\Http\Controllers\Api\BankReconciliationController;
 use App\Http\Controllers\Api\JournalController;
 use App\Http\Controllers\Api\LedgerAccountController;
+use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\MemberPortalController;
+use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\NotificationTemplateController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
@@ -48,6 +52,20 @@ Route::middleware('auth:sanctum')->group(function (): void {
     });
 
     Route::middleware('tenant')->group(function (): void {
+        Route::get('dashboard', DashboardController::class)->middleware('permission:dashboard.view');
+        Route::get('portal/dashboard', [MemberPortalController::class, 'dashboard']);
+        Route::get('portal/profile', [MemberPortalController::class, 'profile']);
+        Route::get('portal/loans', [MemberPortalController::class, 'loans']);
+        Route::get('portal/statements', [MemberPortalController::class, 'statements']);
+        Route::get('notifications', [NotificationController::class, 'index']);
+        Route::get('notifications/unread-count', [NotificationController::class, 'unreadCount']);
+        Route::patch('notifications/read-all', [NotificationController::class, 'readAll']);
+        Route::patch('notifications/{notification}/read', [NotificationController::class, 'read']);
+        Route::get('notification-preferences', [NotificationController::class, 'preferences']);
+        Route::put('notification-preferences', [NotificationController::class, 'updatePreferences']);
+        Route::post('push-subscriptions', [NotificationController::class, 'subscribe']);
+        Route::apiResource('notification-templates', NotificationTemplateController::class)
+            ->except(['show'])->middleware('permission:notifications.manage');
         Route::apiResource('branches', BranchController::class)->middleware('permission:branches.manage');
         Route::apiResource('roles', RoleController::class)->only(['index', 'store', 'update'])->middleware('permission:roles.manage');
         Route::get('permissions', PermissionController::class)->middleware('permission:roles.manage');

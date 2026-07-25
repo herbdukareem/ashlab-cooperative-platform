@@ -1,8 +1,12 @@
 # Ashlab Cooperative Platform
 
+The platform now includes the full Phase 1–8 pilot scope: tenant administration, members and KYC, contributions and savings, lending and payouts, servicing and recovery, accounting and reconciliation, plus a responsive staff/member PWA and notification centre.
+
+Open `http://localhost:8080` after setup to use the web application. See `docs/PILOT_DEPLOYMENT.md` before any pilot deployment.
+
 A configurable, multi-tenant cooperative operations platform for membership, contributions, savings, loans, repayments, payouts, accounting, reporting and member self-service.
 
-This repository contains the platform foundation through the Phase 4 credit-configuration engine:
+This repository contains the complete Phase 1–8 pilot implementation:
 
 - Laravel 13 REST API on PHP 8.3+
 - MySQL 8.4 as the primary database

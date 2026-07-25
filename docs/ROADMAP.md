@@ -60,11 +60,20 @@
 - Financial statements
 - Management dashboards and exports
 
-## Milestone 8 — Experience and deployment
+## Milestone 8 — Experience and deployment (implemented)
 
-- Vue administration portal
-- Member web portal
-- React Native mobile application
-- Notification integrations
-- Performance, security and recovery validation
-- Pilot deployment and training
+- Responsive web administration and linked-member portal
+- Installable mobile PWA with offline application shell
+- Notification inbox, preferences and push-subscription foundation
+- Management and member dashboards
+- Security headers, request tracing and service health checks
+- Pilot deployment and recovery runbook
+
+## Pilot exit criteria
+
+- All migrations and automated tests pass against MySQL 8.4.
+- Tenant-isolation and maker/checker tests pass with representative pilot roles.
+- Payment and payout provider sandbox certification is complete.
+- Trial balance, bank reconciliation and payout-clearing checks balance.
+- Backup restoration, incident response and payout reversal drills pass.
+- Pilot users complete acceptance testing on desktop and Android/iOS mobile browsers.

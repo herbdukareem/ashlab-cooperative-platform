@@ -1,4 +1,4 @@
-# Platform API — Phases 1–3
+# Platform API — Phases 1–8
 
 Base URL: `/api/v1`
 
@@ -101,3 +101,28 @@ Financial amounts use integer minor units. Collection clients must supply a stab
   }
 }
 ```
+## Phase 8 experience
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/dashboard` | Staff KPIs, portfolio health and approval queue |
+| GET | `/portal/dashboard` | Linked member summary |
+| GET | `/portal/profile` | Linked member profile and beneficiaries |
+| GET | `/portal/loans` | Linked member loans and installments |
+| GET | `/portal/statements` | Linked member savings, contribution and repayment activity |
+| GET | `/notifications` | Current user's notification inbox |
+| GET | `/notifications/unread-count` | Unread badge count |
+| PATCH | `/notifications/{notification}/read` | Mark one owned notification read |
+| PATCH | `/notifications/read-all` | Mark all owned notifications read |
+| GET/PUT | `/notification-preferences` | Read or update channel preferences |
+| POST | `/push-subscriptions` | Register a browser/device push subscription |
+| CRUD | `/notification-templates` | Configure tenant event templates by channel |
+
+Member portal routes never accept a member identifier. They resolve the member linked to the authenticated user, preventing horizontal profile access.
+
+## Operations
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/health/live` | Process liveness |
+| GET | `/health/ready` | MySQL and Redis readiness |

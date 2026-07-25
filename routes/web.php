@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\HealthController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => response()->json([
-    'name' => config('app.name'),
-    'status' => 'operational',
-]));
-
+Route::get('/health/live', [HealthController::class, 'live']);
+Route::get('/health/ready', [HealthController::class, 'ready']);
+Route::view('/{path?}', 'app')->where('path', '^(?!api|health|up).*$');

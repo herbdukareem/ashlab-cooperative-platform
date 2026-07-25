@@ -19,10 +19,14 @@ class StoreUserRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:30', 'unique:users,phone'],
             'password' => ['required', 'string', 'min:12', 'confirmed'],
             'branch_id' => ['nullable', Rule::exists('branches', 'id')->where('cooperative_id', $tenantId)],
+            'member_id' => [
+                'nullable',
+                Rule::exists('members', 'id')->where('cooperative_id', $tenantId),
+                Rule::unique('users', 'member_id')->where('cooperative_id', $tenantId),
+            ],
             'status' => ['nullable', Rule::in(['pending', 'active', 'suspended', 'disabled'])],
             'role_ids' => ['required', 'array', 'min:1'],
             'role_ids.*' => [Rule::exists('roles', 'id')->where('cooperative_id', $tenantId)],
         ];
     }
 }
-

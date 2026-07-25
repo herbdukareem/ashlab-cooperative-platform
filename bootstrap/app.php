@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Middleware\RequirePermission;
+use App\Http\Middleware\RequestId;
 use App\Http\Middleware\ResolveTenant;
+use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: 'api/v1',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->append([RequestId::class, SecurityHeaders::class]);
         $middleware->statefulApi();
         $middleware->alias([
             'tenant' => ResolveTenant::class,

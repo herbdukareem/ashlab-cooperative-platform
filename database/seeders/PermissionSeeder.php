@@ -26,6 +26,7 @@ class PermissionSeeder extends Seeder
             'payouts' => ['payouts.view', 'payouts.create', 'payouts.review', 'payouts.approve', 'payouts.release', 'payouts.reverse', 'payouts.reconcile'],
             'accounting' => ['accounting.view', 'accounting.configure', 'accounting.periods.manage', 'accounting.post', 'accounting.reverse', 'accounting.reconcile'],
             'reports' => ['reports.view', 'reports.export'],
+            'experience' => ['dashboard.view', 'notifications.manage'],
         ];
 
         foreach ($groups as $group => $permissions) {

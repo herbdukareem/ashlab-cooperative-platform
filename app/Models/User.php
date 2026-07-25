@@ -17,7 +17,7 @@ class User extends Authenticatable
     use HasApiTokens, HasAuditTrail, HasFactory, HasUlids, Notifiable;
 
     protected $fillable = [
-        'cooperative_id', 'branch_id', 'first_name', 'last_name', 'email',
+        'cooperative_id', 'branch_id', 'member_id', 'first_name', 'last_name', 'email',
         'phone', 'password', 'status', 'is_platform_admin', 'last_login_at',
     ];
 
@@ -36,6 +36,7 @@ class User extends Authenticatable
 
     public function cooperative(): BelongsTo { return $this->belongsTo(Cooperative::class); }
     public function branch(): BelongsTo { return $this->belongsTo(Branch::class); }
+    public function member(): BelongsTo { return $this->belongsTo(Member::class); }
     public function roles(): BelongsToMany { return $this->belongsToMany(Role::class)->withTimestamps(); }
 
     public function hasPermission(string $permission): bool
@@ -47,4 +48,3 @@ class User extends Authenticatable
         return $this->roles()->whereHas('permissions', fn ($query) => $query->where('name', $permission))->exists();
     }
 }
-

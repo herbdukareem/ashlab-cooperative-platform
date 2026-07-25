@@ -1,5 +1,15 @@
 # Changelog
 
+## Phase 8 — Digital experience and pilot hardening
+
+- Added a responsive, installable staff administration and member self-service web application.
+- Added tenant-scoped executive dashboards, portfolio indicators and approval work queues.
+- Added member savings, contribution, loan, repayment, statement and profile experiences.
+- Added an in-app notification inbox, channel preferences, templates, deduplication and push-subscription storage.
+- Added mobile navigation, an offline application shell and PWA manifest.
+- Added request correlation, security headers, liveness/readiness probes and production configuration safeguards.
+- Added tenant-isolation, member-link and notification tests plus a pilot deployment and recovery runbook.
+
 ## Phase 7 — Accounting and intelligence
 
 - Added a hierarchical tenant chart of accounts and controlled fiscal periods.
