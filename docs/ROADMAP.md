@@ -69,6 +69,18 @@
 - Security headers, request tracing and service health checks
 - Pilot deployment and recovery runbook
 
+## Milestone 9 — Integration, testing and pilot release (implemented)
+
+- Sandbox transfer initiation and signed idempotent provider webhooks
+- Replaceable NIN/BVN verification gateway and sandbox implementation
+- CI migration, seeded test and dependency-audit gates
+- Immutable production app/web image builds
+- Manual sandbox staging-release workflow
+- Production Compose topology with workers and scheduler
+- Runtime readiness command and separate live-integration approval gate
+- Read-only pilot member CSV validator and template
+- End-to-end UAT, migration, recovery and launch evidence plan
+
 ## Pilot exit criteria
 
 - All migrations and automated tests pass against MySQL 8.4.
@@ -77,3 +89,4 @@
 - Trial balance, bank reconciliation and payout-clearing checks balance.
 - Backup restoration, incident response and payout reversal drills pass.
 - Pilot users complete acceptance testing on desktop and Android/iOS mobile browsers.
+- No unresolved critical/high defects and formal business, finance and technical sign-off.

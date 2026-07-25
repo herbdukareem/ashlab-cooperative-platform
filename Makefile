@@ -1,4 +1,4 @@
-.PHONY: setup up down test lint format migrate seed shell logs
+.PHONY: setup up down test lint format migrate seed shell logs readiness
 
 setup:
 	cp .env.example .env
@@ -34,3 +34,5 @@ shell:
 logs:
 	docker compose logs -f app nginx worker
 
+readiness:
+	docker compose run --rm app php artisan pilot:readiness --allow-sandbox

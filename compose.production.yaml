@@ -1,0 +1,71 @@
+services:
+  app:
+    image: ${APP_IMAGE:?Set APP_IMAGE to the immutable Phase 9 app image}
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks: [cooperative]
+
+  web:
+    image: ${WEB_IMAGE:?Set WEB_IMAGE to the immutable Phase 9 web image}
+    ports: ["127.0.0.1:8080:80"]
+    restart: unless-stopped
+    depends_on: [app]
+    networks: [cooperative]
+
+  worker:
+    image: ${APP_IMAGE:?Set APP_IMAGE to the immutable Phase 9 app image}
+    command: php artisan queue:work --sleep=1 --tries=3 --timeout=90
+    env_file: .env
+    restart: unless-stopped
+    depends_on: [app]
+    networks: [cooperative]
+
+  scheduler:
+    image: ${APP_IMAGE:?Set APP_IMAGE to the immutable Phase 9 app image}
+    command: php artisan schedule:work
+    env_file: .env
+    restart: unless-stopped
+    depends_on: [app]
+    networks: [cooperative]
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:?Set DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME:?Set DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD}
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --log-bin=mysql-bin
+    volumes: [mysql_data:/var/lib/mysql]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks: [cooperative]
+
+  redis:
+    image: redis:7.4-alpine
+    command: redis-server --appendonly yes
+    volumes: [redis_data:/data]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [cooperative]
+
+volumes:
+  mysql_data:
+  redis_data:
+
+networks:
+  cooperative:
+    driver: bridge

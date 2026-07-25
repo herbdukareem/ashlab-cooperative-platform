@@ -12,13 +12,18 @@ use App\Models\JournalEntry;
 use App\Models\Loan;
 use App\Models\Payout;
 use App\Models\PayoutEvent;
+use App\Integrations\Contracts\TransferGateway;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class ProcessPayout
 {
-    public function __construct(private AutoPoster $accounting, private ReverseJournal $reversals) {}
+    public function __construct(
+        private AutoPoster $accounting,
+        private ReverseJournal $reversals,
+        private TransferGateway $gateway,
+    ) {}
 
     public function approve(Payout $payout): Payout
     {
@@ -33,8 +38,11 @@ class ProcessPayout
         if ($payout->status !== PayoutStatus::Approved) throw ValidationException::withMessages(['status' => ['Only approved payouts can be released.']]);
         if ($payout->created_by === Auth::id()) throw ValidationException::withMessages(['actor' => ['The payout creator cannot release the same payout.']]);
         if ($payout->scheduled_for?->isFuture()) throw ValidationException::withMessages(['scheduled_for' => ['This payout is not due for release.']]);
-        $payout->update(['status' => PayoutStatus::Processing, 'provider' => $provider, 'released_by' => Auth::id(), 'released_at' => now()]);
-        $payout->events()->create(['event_type' => 'released', 'payload' => ['provider' => $provider], 'occurred_at' => now()]);
+        $configuredProvider = (string) config('integrations.transfer.driver');
+        if ($provider !== $configuredProvider) throw ValidationException::withMessages(['provider' => ['The requested provider is not the configured transfer gateway.']]);
+        $result = $this->gateway->initiate($payout);
+        $payout->update(['status' => PayoutStatus::Processing, 'provider' => $configuredProvider, 'provider_reference' => $result['reference'], 'released_by' => Auth::id(), 'released_at' => now()]);
+        $payout->events()->create(['event_type' => 'released', 'payload' => ['provider' => $configuredProvider, 'gateway' => $result['raw']], 'occurred_at' => now()]);
         return $payout->refresh();
     }
 

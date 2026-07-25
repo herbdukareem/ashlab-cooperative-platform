@@ -126,3 +126,9 @@ Member portal routes never accept a member identifier. They resolve the member l
 |---|---|---|
 | GET | `/health/live` | Process liveness |
 | GET | `/health/ready` | MySQL and Redis readiness |
+# Phase 9 integrations
+
+- `POST /api/v1/webhooks/transfers` — signed provider callback; no user token, HMAC signature required
+- `POST /api/v1/members/{member}/identifications/{identification}/provider-verification` — verify NIN/BVN through the configured tenant-safe identity gateway
+
+Transfer callbacks accept `event_id`, `reference`, `event` and optional `failure_reason`. The raw JSON body must be signed with HMAC-SHA256 and sent in `X-Webhook-Signature`. Supported events are `processing`, `paid`, `failed` and `reversed`.

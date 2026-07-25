@@ -39,9 +39,11 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\MemberPortalController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\NotificationTemplateController;
+use App\Http\Controllers\Api\TransferWebhookController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
+Route::post('/webhooks/transfers', TransferWebhookController::class)->middleware('throttle:webhooks');
 
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('/auth/me', [AuthController::class, 'me']);
@@ -83,6 +85,7 @@ Route::middleware('auth:sanctum')->group(function (): void {
 
         Route::post('members/{member}/identifications', [MemberIdentificationController::class, 'store'])->middleware('permission:kyc.manage');
         Route::patch('members/{member}/identifications/{identification}/verify', [MemberIdentificationController::class, 'verify'])->middleware('permission:kyc.verify');
+        Route::post('members/{member}/identifications/{identification}/provider-verification', [MemberIdentificationController::class, 'verifyWithProvider'])->middleware('permission:kyc.verify');
         Route::delete('members/{member}/identifications/{identification}', [MemberIdentificationController::class, 'destroy'])->middleware('permission:kyc.manage');
 
         Route::post('members/{member}/documents', [MemberDocumentController::class, 'store'])->middleware('permission:kyc.manage');

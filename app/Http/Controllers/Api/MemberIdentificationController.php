@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Domain\Members\Actions\StoreMemberIdentification;
+use App\Domain\Members\Actions\VerifyMemberIdentification;
 use App\Enums\KycStatus;
 use App\Enums\VerificationStatus;
 use App\Http\Controllers\Controller;
@@ -26,6 +27,13 @@ class MemberIdentificationController extends Controller
         $identification->update(['verification_status' => $status, 'verified_by' => Auth::id(), 'verified_at' => $status === VerificationStatus::Verified ? now() : null, 'rejection_reason' => $data['reason'] ?? null]);
         $this->refreshKycStatus($member);
         return new MemberIdentificationResource($identification->refresh());
+    }
+
+    public function verifyWithProvider(Member $member, MemberIdentification $identification, VerifyMemberIdentification $verify): MemberIdentificationResource
+    {
+        $this->owns($member, $identification);
+
+        return new MemberIdentificationResource($verify->execute($identification));
     }
 
     public function destroy(Member $member, MemberIdentification $identification): mixed

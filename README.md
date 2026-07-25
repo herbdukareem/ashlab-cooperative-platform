@@ -1,12 +1,12 @@
 # Ashlab Cooperative Platform
 
-The platform now includes the full Phase 1–8 pilot scope: tenant administration, members and KYC, contributions and savings, lending and payouts, servicing and recovery, accounting and reconciliation, plus a responsive staff/member PWA and notification centre.
+The platform now includes the Phase 1–9 pilot scope: tenant administration, members and KYC, contributions and savings, lending and payouts, servicing and recovery, accounting and reconciliation, a responsive staff/member PWA, notifications, sandbox provider integrations and release controls.
 
 Open `http://localhost:8080` after setup to use the web application. See `docs/PILOT_DEPLOYMENT.md` before any pilot deployment.
 
 A configurable, multi-tenant cooperative operations platform for membership, contributions, savings, loans, repayments, payouts, accounting, reporting and member self-service.
 
-This repository contains the complete Phase 1–8 pilot implementation:
+This repository contains the complete Phase 1–9 pilot implementation:
 
 - Laravel 13 REST API on PHP 8.3+
 - MySQL 8.4 as the primary database
@@ -46,6 +46,10 @@ This repository contains the complete Phase 1–8 pilot implementation:
 - Balanced immutable journals, reversals and member, loan and branch subsidiary dimensions
 - Protected cooperative bank accounts, statement matching and reconciliation
 - Trial balance, income statement and balance sheet reporting
+- Signed, idempotent transfer webhooks and sandbox transfer initiation
+- Replaceable NIN/BVN identity-verification contract with a safe sandbox adapter
+- Production image builds, staging release workflow and live-integration kill switch
+- Pilot readiness command, read-only member CSV validation and UAT release plan
 
 ## Quick start with Docker
 
@@ -81,6 +85,13 @@ composer lint
 composer test
 ```
 
+Validate a staging deployment and a proposed member file:
+
+```bash
+php artisan pilot:readiness --allow-sandbox
+php artisan pilot:validate-members docs/templates/pilot_members.csv
+```
+
 ## Repository map
 
 - `app/Support/Tenancy` — resolved tenant context
@@ -94,8 +105,8 @@ composer test
 
 ## Security posture
 
-This is an implementation milestone, not yet a production release. Before real member or financial data is introduced, complete deployment hardening, secrets management, MFA, backup restoration testing, penetration testing, privacy review and payment-provider certification.
+This is a pilot release candidate, not approval to process real money. Keep integrations in sandbox until CI, UAT, restore testing, privacy/security review, provider certification and opening-balance reconciliation are formally signed off.
 
 ## Next milestone
 
-Phase 8 will add the administration and member web applications, mobile experience, notifications, operational dashboards and pilot deployment hardening.
+Complete staging UAT with the first cooperative, configure approved Nigerian transfer and identity-provider adapters, then grant the separate live-integration approval only after the Phase 9 exit criteria pass.

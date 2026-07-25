@@ -32,9 +32,10 @@ jobs:
           coverage: none
 
       - run: composer install --no-interaction --prefer-dist
+      - run: composer audit --no-interaction
       - run: cp .env.example .env
       - run: php artisan key:generate
-      - run: php artisan migrate --force
+      - run: php artisan migrate:fresh --seed --force
         env:
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1

@@ -1,5 +1,15 @@
 # Changelog
 
+## Phase 9 — Integrations, release testing and pilot launch controls
+
+- Added provider-neutral transfer and identity-verification contracts with deterministic sandbox adapters.
+- Added signed, rate-limited and idempotent transfer webhooks with tenant restoration before accounting.
+- Added NIN/BVN provider verification without exposing protected identifier values.
+- Added a separate live-integration kill switch and rejected unsupported provider configuration.
+- Strengthened CI with fresh seeded MySQL migrations, tests and dependency auditing.
+- Added immutable production image targets, a manual sandbox staging workflow and production Compose topology.
+- Added runtime readiness checks, a read-only pilot member validator/template, UAT journeys and launch evidence gates.
+
 ## Phase 8 — Digital experience and pilot hardening
 
 - Added a responsive, installable staff administration and member self-service web application.

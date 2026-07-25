@@ -21,4 +21,9 @@ final class ProtectedIdentifier
     {
         return mb_strtoupper((string) preg_replace('/[^A-Za-z0-9]/', '', trim($value)));
     }
+
+    public function reveal(string $encrypted): string
+    {
+        return Crypt::decryptString($encrypted);
+    }
 }
